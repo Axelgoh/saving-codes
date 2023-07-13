@@ -1,24 +1,25 @@
 
+<html>
+<body>
 
-const Navbar = () => {
-  const [isNavbarVisible, setNavbarVisible] = useState(true);
+<h2>JavaScript HTML DOM</h2>
+<p>Add a new HTML Element.</p>
 
-  useEffect(() => {
-    let prevScrollPos = window.pageYOffset;
+<div id="div1">
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+</div>
 
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      const isScrolledUp = prevScrollPos > currentScrollPos;
+<script>
+const para = document.createElement("p");
+const node = document.createTextNode("This is new.");
+para.appendChild(node);
+const element = document.getElementById("div1");
+element.appendChild(para);
+</script>
 
-      setNavbarVisible(isScrolledUp);
-      prevScrollPos = currentScrollPos;
-    };
+</body>
+</html>
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <nav className={`sidebar ${isNavbarVisible ? '' : 'hidden'}`}>
     
 # saving-codes
