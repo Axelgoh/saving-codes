@@ -135,9 +135,11 @@ import Home from './Home';
 import CreatePage from './CreatePage';
 
 const App = () => {
+   const [posts, setPosts] = useState([]);
+
   const addNewPost = (title, description) => {
-    // Implement the logic to store or send the data as required
-    console.log('New Post:', title, description);
+    const newPost = { title, description };
+    setPosts(prevPosts => [...prevPosts, newPost]);
   };
 
   return (
