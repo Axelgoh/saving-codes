@@ -261,3 +261,75 @@ export default App;
 
     
 # saving-codes
+
+
+TypeError: addNewPost is not a function
+handleSubmit
+C:/Users/smis038/Desktop/Axel goh projects/aia-feedback-forum-react/src/pages/CreatePage.js:20
+  17 | 
+  18 |  const handleSubmit = event => {
+  19 |    event.preventDefault();
+> 20 |    addNewPost(innovationTitle, innovationDescription);
+     | ^  21 | 
+  22 | 
+  23 |    // Clear the form inputs after submission
+View compiled
+HTMLUnknownElement.callCallback
+C:/Users/smis038/Desktop/Axel goh projects/aia-feedback-forum-react/node_modules/react-dom/cjs/react-dom.development.js:3733
+  3730 | function callCallback() {
+  3731 |   didCall = true;
+  3732 |   restoreAfterDispatch();
+> 3733 |   func.apply(context, funcArgs);
+       | ^  3734 |   didError = false;
+  3735 | } // Create a global error event handler. We use this to capture the value
+  3736 | // that was thrown. It's possible that this error handler will fire more
+View compiled
+invokeGuardedCallbackDev
+C:/Users/smis038/Desktop/Axel goh projects/aia-feedback-forum-react/node_modules/react-dom/cjs/react-dom.development.js:3777
+  3774 | // errors, it will trigger our global error handler.
+  3775 | 
+  3776 | evt.initEvent(evtType, false, false);
+> 3777 | fakeNode.dispatchEvent(evt);
+       | ^  3778 | if (windowEventDescriptor) {
+  3779 |   Object.defineProperty(window, 'event', windowEventDescriptor);
+  3780 | }
+View compiled
+invokeGuardedCallback
+C:/Users/smis038/Desktop/Axel goh projects/aia-feedback-forum-react/node_modules/react-dom/cjs/react-dom.development.js:3834
+  3831 | function invokeGuardedCallback(name, func, context, a, b, c, d, e, f) {
+  3832 |   hasError = false;
+  3833 |   caughtError = null;
+> 3834 |   invokeGuardedCallbackImpl$1.apply(reporter, arguments);
+       | ^  3835 | }
+  3836 | /**
+  3837 |  * Same as invokeGuardedCallback, but instead of returning an error, it stores
+View compiled
+invokeGuardedCallbackAndCatchFirstError
+C:/Users/smis038/Desktop/Axel goh projects/aia-feedback-forum-react/node_modules/react-dom/cjs/react-dom.development.js:3848
+  3845 |  */
+  3846 | 
+  3847 | function invokeGuardedCallbackAndCatchFirstError(name, func, context, a, b, c, d, e, f) {
+> 3848 |   invokeGuardedCallback.apply(this, arguments);
+       | ^  3849 |   if (hasError) {
+  3850 |     var error = clearCaughtError();
+  3851 |     if (!hasRethrowError) {
+View compiled
+executeDispatch
+C:/Users/smis038/Desktop/Axel goh projects/aia-feedback-forum-react/node_modules/react-dom/cjs/react-dom.development.js:7992
+  7989 | function executeDispatch(event, listener, currentTarget) {
+  7990 |   var type = event.type || 'unknown-event';
+  7991 |   event.currentTarget = currentTarget;
+> 7992 |   invokeGuardedCallbackAndCatchFirstError(type, listener, undefined, event);
+       | ^  7993 |   event.currentTarget = null;
+  7994 | }
+  7995 | function processDispatchQueueItemsInOrder(event, dispatchListeners, inCapturePhase) {
+View compiled
+processDispatchQueueItemsInOrder
+C:/Users/smis038/Desktop/Axel goh projects/aia-feedback-forum-react/node_modules/react-dom/cjs/react-dom.development.js:8018
+  8015 |     if (_instance !== previousInstance && event.isPropagationStopped()) {
+  8016 |       return;
+  8017 |     }
+> 8018 |     executeDispatch(event, _listener, _currentTarget);
+       | ^  8019 |     previousInstance = _instance;
+  8020 |   }
+  8021 | }
