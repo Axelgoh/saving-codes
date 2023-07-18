@@ -18,7 +18,8 @@ const CreateNewPost = ({ innovationTitle, innovationDescription }) => {
 
 export default CreateNewPost;
 
-  Home import * as React from 'react';
+  Home 
+  import * as React from 'react';
 import { Component } from "react";
 import Sidebar from '../components/Sidebar.js';
 import Navbar from '../components/Navbar.js';
@@ -144,12 +145,18 @@ export default Home;
 
 
 
+
+
+
+
+
 create page 
 import * as React from 'react';
 import '../css/styles.css';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
 import CategorySelect from "../components/CategorySelect-Dropdown.js";
+import * as Home from './Home';
 import {subforum} from './Home';
 import CreateNewPost from '../components/scripting/CreateNewPost';
 import {useState, useEffect} from 'react';
@@ -157,13 +164,14 @@ import { Box, InputLabel,MenuItem, FormControl, Select, Popover, Button, Slider}
 
 
 
-const CreatePage = ({addNewPost}) => {
+const CreatePage = ({ addNewPost }) => {
   const [innovationTitle, setInnovationTitle] = useState('');
   const [innovationDescription, setInnovationDescription] = useState('');
 
   const handleSubmit = event => {
     event.preventDefault();
     addNewPost(innovationTitle, innovationDescription);
+
 
     // Clear the form inputs after submission
     setInnovationTitle('');
@@ -246,18 +254,40 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route exact path="/">
-          <Home posts={posts} />
-        </Route>
         <Route path="/createpage">
            <CreatePage addNewPost={addNewPost} />
          </Route>
+        <Route exact path="/">
+          <Home posts={posts} />
+        </Route>
       </Routes>
     </Router>
   );
 };
 
 export default App;
+
+
+
+index  
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import "./css/styles.css";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+reportWebVitals();
 
     
 # saving-codes
