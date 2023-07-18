@@ -1,7 +1,7 @@
 script 
 import React from 'react';
 
-const CreateNewPost = () => {
+const CreateNewPost = ({ innovationTitle, innovationDescription }) => {
   // The CreateNewPost component can be a separate reusable component
   // that takes the innovationTitle and innovationDescription as props,
   // and renders the content accordingly.
@@ -22,12 +22,6 @@ export default CreateNewPost;
   import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
-import BasicPopover from "../components/BasicPopover";
-import { FaSearch } from 'react-icons/fa';
-import { Link } from "react-router-dom";
-import { Box, InputLabel, MenuItem, FormControl, Select, Popover, Button, Slider } from '@mui/material';
-import DiamondTwoToneIcon from '@mui/icons-material/DiamondTwoTone';
-import ControlPointRoundedIcon from '@mui/icons-material/ControlPointRounded';
 import CreateNewPost from '../components/scripting/CreateNewPost';
 
 const Home = () => {
@@ -35,7 +29,7 @@ const Home = () => {
 
   const addNewPost = (title, description) => {
     const newPost = { title, description };
-    setPosts((prevPosts) => [...prevPosts, newPost]);
+    setPosts(prevPosts => [...prevPosts, newPost]);
   };
 
   return (
@@ -70,21 +64,18 @@ import Navbar from '../components/Navbar';
 import CategorySelect from "../components/CategorySelect-Dropdown.js";
 import { Box, InputLabel, MenuItem, FormControl, Select, Popover, Button, Slider } from '@mui/material';
 
-const CreatePage = () => {
+const CreatePage = ({ addNewPost }) => {
   const [innovationTitle, setInnovationTitle] = useState('');
   const [innovationDescription, setInnovationDescription] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
-
-    // Create a new post or perform any other actions with the form values
-    // Here, you can call any relevant functions or APIs to save the data
+    addNewPost(innovationTitle, innovationDescription);
 
     // Clear the form inputs after submission
     setInnovationTitle('');
     setInnovationDescription('');
   };
-
   return (
     <div>
       <Navbar />
@@ -92,7 +83,7 @@ const CreatePage = () => {
         <div>
           <Sidebar />
         </div>
-        <div className="container" id="forum">
+         <div className="container" id="forum">
           <form onSubmit={handleSubmit}>
             <h1>Submit Innovation</h1>
             <p>Do you have a great idea or innovation that could make your workplace more productive, efficient, or enjoyable? We invite you to share your brilliance and ingenuity with us! Submit your idea today and be part of the positive change in your workplace.</p>
@@ -137,6 +128,31 @@ const CreatePage = () => {
 
 export default CreatePage;
 
+App 
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './Home';
+import CreatePage from './CreatePage';
+
+const App = () => {
+  const addNewPost = (title, description) => {
+    // Implement the logic to store or send the data as required
+    console.log('New Post:', title, description);
+  };
+
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/createpage">
+          <CreatePage addNewPost={addNewPost} />
+        </Route>
+      </Switch>
+    </Router>
+  );
+};
+
+export default App;
 
     
 # saving-codes
