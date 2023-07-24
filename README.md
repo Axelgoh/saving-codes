@@ -292,56 +292,25 @@ reportWebVitals();
     
 # saving-codes
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import "./css/styles.css";
-import CreatePage from './pages/CreatePage';
-import Home from './pages/Home';
-import LoginPage from './pages/LoginPage';
 
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './Home';
+import Display from './display';
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+function App() {
+  const [feedbacks, setFeedbacks] = useState(() => {
+    // Initialize state from localStorage or an empty array
+    const storedFeedbacks = localStorage.getItem('feedbacks');
+    return storedFeedbacks ? JSON.parse(storedFeedbacks) : [];
+  });
 
-const router = createBrowserRouter([
-    {
-    path: "/",
-    element: <App/>,
-  },
-  {
-    path: "home",
-    element: <Home/>,
-  },
-  {
-      path: "createpage",
-      element: <CreatePage/>,
-    },
-    {
-          path: "loginpage",
-          element: <LoginPage/>,
-        },
-]);
+  useEffect(() => {
+    // Save feedbacks to localStorage whenever they change
+    localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+  }, [feedbacks]);
 
+  const addFeedback = (feedback) => {
+    setFeedbacks([...feedbacks, feedback]);
+  };
 
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import "./css/styles.css";
-
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
-);
-
-reportWebVitals();
