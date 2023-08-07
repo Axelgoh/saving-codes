@@ -1,55 +1,54 @@
-I have created a basic REST API for handling CRUD operations on feedbacks and feedback description. The FeedbackResource class maps the HTTP methods (GET, POST, PUT, DELETE) to the corresponding methods in the FeedbackRepository, which interacts with the PostgreSQL database.
+package org.acme;
 
-Here's a summary of how the classes fit into the layered architecture:
+public class Feedback {
+    public String title;
+    public String description;
 
-FeedbackResource: Controller (interacts with the client via REST API endpoints).
-FeedbackRepository: Model (handles data access and database interactions).
-FeedbackRespositoryImp: Model (
-Feedback: Domain (represents the core business entity).
-
-Domain Layer: The Domain Layer defines the core business entities and their behavior. In this context, the Feedback class represents the core business entity, defining the structure and properties of a feedback entry. The domain layer is where business rules and logic related to feedbacks would be implemented, although it may not be explicitly shown in the provided code.
-
-Repository Layer: The Repository Layer is responsible for data access and persistence. It abstracts away the underlying data storage and provides an interface to interact with the data. The FeedbackRepository interface defines the contract for accessing feedback data, and the FeedbackRepositoryImpl class provides the actual implementation of this contract. It handles interactions with the PostgreSQL database and performs CRUD operations on the Feedback entity.
-
-Service Layer: As mentioned earlier, in the provided code, there is no explicit "Service" class defined. However, in more complex applications, the Service Layer would contain the business logic and act as an intermediary between the Controller and the Repository. The Service Layer would use the FeedbackRepository interface to interact with the data and apply business rules if needed.
-
-Controller Layer: In the context of a ReactJS frontend application, the Controller Layer typically resides in the frontend components, such as the Feedback and Display components in the provided code. The components handle user interactions, manage state, and communicate with the backend API (REST endpoints) to perform CRUD operations on feedback data.
+    public Feedback(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+}
 
 
+package org.acme;
 
-Step 1: Set Up the Project
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
-Create a new Quarkus project using the Quarkus Maven archetype. 
-Add the required dependencies for Quarkus with RESTEasy (JAX-RS) and PostgreSQL (depends on what database) persistence. You can use the following dependencies in your pom.xml:
-xml
-Copy code
-<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-resteasy</artifactId>
-</dependency>
-<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-jdbc-postgresql</artifactId>
-</dependency>
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
 
+@Path("/feedbacks")
+public class FeedbackResource {
 
-Step 2: Create the Feedback Entity Class
+    private Set<Feedback> feedbacks = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
-Create a Java class named Feedback to represent the feedback entity. It should contain fields for id, feedback, and feedbackDescription.
+    public FeedbackResource() {
+        feedbacks.add(new Feedback("Efficiency working", "Implement team bonding every friday to allow team to build strong wokring ties. "));
+        feedbacks.add(new Feedback("Vending Machine", "Provide vending machine in the office to allow workers to save time on going out to get snacks and instead go to the vending machine to get their snacks fixed."));
+        feedbacks.add(new Feedback("Efficiency working", "Implement team bonding every friday to allow team to build strong wokring ties. "));
+        feedbacks.add(new Feedback("Efficiency working", "Implement team bonding every friday to allow team to build strong wokring ties. "));
 
+    }
 
-Step 3: Create the FeedbackRepository Interface
-Create a Java interface named FeedbackRepository to define the repository methods for handling database interactions.
+    @GET
+    public Set<Feedback> list() {
+        return feedbacks;
+    }
 
-Step 4: Implement the FeedbackRepository with PostgreSQL
-Create a class named FeedbackRepositoryImpl that implements the FeedbackRepository interface. This class will handle the database interactions with PostgreSQL.
+    @POST
+    public void add(Feedback feedback) {
+        feedbacks.add(feedback);
+    }
 
-The FeedbackRepositoryImpl is an implementation class of the FeedbackRepository interface. It is responsible for handling the database interactions and implementing the methods defined in the FeedbackRepository interface. The implementation class contains the actual logic to perform CRUD (Create, Read, Update, Delete) operations on the Feedback entity in the database.
+    @DELETE
+    public Set<Feedback> delete(Feedback feedback) {
+        feedbacks.removeIf(existingFeedback -> existingFeedback.title.contentEquals(feedback.title));
+        return feedbacks;
+    }
+}
 
-
-Step 5: Create the FeedbackResource for the REST API
-Create a class named FeedbackResource to define the RESTful endpoints for the feedbacks resource. Use JAX-RS annotations to map the methods to HTTP endpoints.
-
-In this class, i use JAX-RS annotations (@Path, @GET, @POST, @PUT, @DELETE, etc.) to define the API endpoints, which are used to interact with the feedbacks and feedback description resources. These endpoints are responsible for processing incoming HTTP requests and delegating the corresponding operations to the FeedbackRepository component (the "model") to handle the database interactions and business logic.
-
-So, the FeedbackResource class acts as the controller, as it defines the behavior of the API endpoints and manages the flow of data between the client and the underlying database through the FeedbackRepository.
