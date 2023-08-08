@@ -51,4 +51,18 @@ public class FeedbackResource {
         return feedbacks;
     }
 }
+// like function below 
+
+const handleLikeFeedback = (title) => {
+  fetch(`http://localhost:8080/api/feedbacks/${title}/like`, {
+    method: 'PUT',
+  })
+    .then(() => {
+      const updatedFeedbacks = feedbacks.map((feedback) =>
+        feedback.title === title ? { ...feedback, likes: feedback.likes + 1 } : feedback
+      );
+      setFeedbacks(updatedFeedbacks);
+    })
+    .catch((error) => console.error('Error liking feedback:', error));
+};
 
