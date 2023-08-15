@@ -1,3 +1,76 @@
+Feedbacks Web Application
+A simple web application for submitting and displaying user feedbacks.
+
+Table of Contents
+Introduction
+Features
+Getting Started
+Prerequisites
+Installation
+Running the Application
+Usage
+Submitting Feedback
+Displaying Feedback
+Liking Feedback
+Screenshots
+Contributing
+License
+Introduction
+This web application provides a user-friendly interface for submitting, viewing, and interacting with user feedback entries. It's built using React.js framework and communicates with a corresponding REST API for managing feedback entries.
+
+Features
+Submit new feedback entries.
+Display a list of user feedbacks.
+Like user feedbacks to show appreciation.
+Easy navigation between submission and display pages.
+Getting Started
+Prerequisites
+To run this application locally, you need to have the following installed:
+
+Node.js
+npm (Node Package Manager)
+Installation
+Clone the repository:
+
+sh
+Copy code
+git clone https://github.com/your-username/feedbacks-web-app.git
+cd feedbacks-web-app
+Install dependencies:
+
+sh
+Copy code
+npm install
+Running the Application
+Start the development server:
+
+sh
+Copy code
+npm start
+The application will be accessible at http://localhost:3000.
+
+Usage
+Submitting Feedback
+Launch the application in your web browser.
+Go to the "Home" page.
+Fill in the feedback title and description.
+Click the "Submit" button.
+Displaying Feedback
+Go to the "Display" page.
+View the list of submitted feedbacks.
+Liking Feedback
+On the "Display" page, each feedback entry has a "Like" button.
+Click the "Like" button to show appreciation for a feedback.
+Screenshots
+Include screenshots of your application in action, showcasing its features.
+
+Contributing
+Contributions are welcome! Please see the CONTRIBUTING.md file for guidelines.
+
+License
+This project is licensed under the MIT License.
+
+
 script 
 import React from 'react';
 
