@@ -1,3 +1,32 @@
+
+{likedPosts.length > 0 && (
+        <div>
+          <h2>Your Liked Posts</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Likes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {likedPosts.map((feedback) => (
+                <tr key={feedback.id}>
+                  <td>{feedback.title}</td>
+                  <td>{feedback.description}</td>
+                  <td>{feedback.likes}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+
+
+
+
 Table of Contents
 Introduction
 Features
