@@ -1,3 +1,30 @@
+import * as React from 'react';
+import { FormControl, Select} from'@mui/material';
+
+import { Link } from "react-router-dom";
+
+
+
+
+export default function CategorySelect() { //category select dropdown list
+      const [department, setdepartment] = React.useState('');
+
+      const handleChange = (event) => {
+        setdepartment(event.target.value);
+      };
+      return (
+      <form className="department-category">
+        <select  id="category-select" name="postcategory" value={department} label="Category" onChange={handleChange}>
+        <option value={"none"}  hidden>Department</option>
+        <option value={"Finance"}>Finance</option>
+        <option value={"Marketing"}>Marketing</option>
+        <option value={"IT"}>IT</option>
+        </select>
+      </form>
+      )
+      }
+
+
 Feedbacks Web Application
 A simple web application for submitting and displaying user feedbacks.
 
